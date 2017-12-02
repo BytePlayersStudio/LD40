@@ -26,6 +26,7 @@ public class Waitress : MonoBehaviour {
 	//Nodes for the patrol behavior
 	public Transform node1;
 	public Transform node2;
+	[HideInInspector]
 	public Transform activeNode;
 
 	//Movement variables
@@ -40,11 +41,12 @@ public class Waitress : MonoBehaviour {
 	Vector2 directionToPlayer;
 
 	//Detection variables
-	public bool isInRange;
-	public bool canShoot;
+
+	private bool isInRange;
+	private bool canShoot;
 
 
-	public bool facingRight;
+	private bool facingRight;
 	//Shooting mechanics
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
