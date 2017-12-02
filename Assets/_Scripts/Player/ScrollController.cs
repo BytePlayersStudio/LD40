@@ -5,20 +5,16 @@ using UnityEngine;
 public class ScrollController : MonoBehaviour {
 
     private Rigidbody2D _rb;
-    private bool _isJumping;
+    public bool _isJumping;
 
     public float speed;
     public float jumpForce;
-	Transform groundCheck;
     
-	// Use this for initialization
 	void Start () {
         _rb = GetComponent<Rigidbody2D>();
         _isJumping = false;
-		groundCheck = transform.GetChild(1).transform;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
@@ -36,21 +32,27 @@ public class ScrollController : MonoBehaviour {
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime * -1, _rb.velocity.y);
         }
+        else
+        {
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
+        }
     }
 
     private void Jump()
     {
+        Debug.Log("Jumping");
         _rb.velocity = new Vector3(_rb.velocity.x, 0f);
         _rb.AddForce(new Vector2(0f, jumpForce));
+
         _isJumping = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (col.gameObject.tag == "Platform")
+        {
+            Debug.Log("Inside");
             _isJumping = false;
+        }
     }
-
-
-
 }
