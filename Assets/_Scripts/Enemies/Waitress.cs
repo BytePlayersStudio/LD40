@@ -13,6 +13,7 @@ public class Waitress : MonoBehaviour {
 		Shooting
 	};
 	State currentState;
+
 	#region Variables
 	//Components
 	Rigidbody2D rb;
@@ -53,6 +54,10 @@ public class Waitress : MonoBehaviour {
 	public float bulletSpeed;
 	private float lastShot;
 	public float DelayBetweenBullets = 1;
+
+	//Animator Variables
+	Animator anim_controller;
+	bool isAttacking;
 	#endregion
 
 	#region Unity Methods
@@ -79,17 +84,30 @@ public class Waitress : MonoBehaviour {
 
 		facingRight = true;
 		currentState = State.Patrol;
+
+		anim_controller = transform.GetComponentInChildren<Animator>();
 	}
 
 	void Update ()
 	{
 		if (currentState == State.Patrol)
+		{
+			isAttacking = false;
 			Patrol();
+			setAnimations();
+		}
 		if (currentState == State.Chasing)
+		{
+			isAttacking = false;
 			ApproachPlayer();
+		}
 		if (currentState == State.Shooting)
+		{
+			isAttacking = true;
 			Shoot();
-		Debug.Log(currentState.ToString());
+		}
+		setAnimations();
+		//Debug.Log(currentState.ToString());
 	}
 
 	void FixedUpdate()
@@ -102,6 +120,10 @@ public class Waitress : MonoBehaviour {
 
 	#region Custom Functions
 
+	void setAnimations()
+	{
+		anim_controller.SetBool("isAttacking", isAttacking);
+	}
 	/// <summary>
 	/// Patrol method.
 	/// </summary>
@@ -144,7 +166,8 @@ public class Waitress : MonoBehaviour {
 		if (Time.time - lastShot > DelayBetweenBullets)
 		{
 			var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-			bullet.GetComponent<Rigidbody2D>().AddForce(transform.localScale * bulletSpeed * 10);
+			
+			bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(1 * transform.localScale.x,1) * bulletSpeed * 10);
 			Destroy(bullet, 2.0f);
 
 			lastShot = Time.time;
