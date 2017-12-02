@@ -7,7 +7,16 @@ using UnityEngine;
 
 public class Waitress : MonoBehaviour {
 
+	enum State {
+		Patrol,
+		Chasing,
+		Shooting
+	};
+	State currentState;
 	#region Variables
+	//Components
+	Rigidbody2D rb;
+
 	// We need a Shooting Range for the Enemies,
 	// We also need a vision range for the enemies and shoot a ray to check if they can see the player
 	public float shootingRange;
@@ -17,20 +26,33 @@ public class Waitress : MonoBehaviour {
 	//Nodes for the patrol behavior
 	public Transform node1;
 	public Transform node2;
+	public Transform activeNode;
 
 	//Movement variables
 	public float moveSpeed;
+	private float moveSpeedIncreased;
+	public float speedIncreaseFactor;
+
+	//Related to player variables.
+
+	public GameObject player;
+	float distanceFromPlayer; //Absolute distance from player
+	Vector2 directionToPlayer;
 
 	//Detection variables
 	public bool isInRange;
 	public bool canShoot;
 
+
+	public bool facingRight;
 	#endregion
 
 	#region Unity Methods
 
 	void Start () 
 	{
+		if (player == null) Debug.LogError("Player not found.");
+
 		if (shootingRange == 0) shootingRange = 4.0f;
 		if (visionRange == 0) visionRange= 5.0f;
 
@@ -39,56 +61,94 @@ public class Waitress : MonoBehaviour {
 
 		if (moveSpeed == 0) moveSpeed = 10.0f;
 
+		if(rb == null) rb = transform.GetComponent<Rigidbody2D>();
+
 		direction = new Vector2(transform.localScale.x, 0);
+		moveSpeedIncreased = moveSpeed * speedIncreaseFactor;
+		activeNode = node1;
+
+		facingRight = true;
+		currentState = State.Patrol;
 	}
 
 	void Update ()
 	{
-		Patrol();
-		if (isInRange)
-		{
-			// We can get closer to the player within the limits of the patrol node.
-			// We check if we can shoot.
+		if (currentState == State.Patrol)
+			Patrol();
+		if (currentState == State.Chasing)
 			ApproachPlayer();
-			if (canShoot)
-			{
-				// The Enemy can shoot.
-				Shoot();
-			}
-		}
-
+		if (currentState == State.Shooting)
+			Shoot();
 	}
 
 	void FixedUpdate()
 	{
 		isInRange = InRange(transform,direction, visionRange,"Player", Color.green);
 		canShoot = InRange(transform, direction, shootingRange, "Player", Color.red);
+		distanceFromPlayer = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
+
+
 	}
 	#endregion
 
 	#region Custom Functions
 
+	/// <summary>
+	/// Patrol method.
+	/// </summary>
 	private void Patrol()
 	{
 		transform.Translate(direction * Time.deltaTime * moveSpeed);
 		if (Vector2.Distance(transform.position, node1.position) < .1f) {
 			FlipSprite();
+			facingRight = false;
+			activeNode = node2;
 		}
 		if (Vector2.Distance(transform.position, node2.position) < .1f)
 		{
 			FlipSprite();
+			facingRight = true;
+			activeNode = node1;
 		}
+
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange)
+			currentState = State.Shooting;
+		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange
+			 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange)
+			currentState = State.Chasing;
 	}
 
 	private void ApproachPlayer()
 	{
+		transform.Translate(direction * Time.deltaTime * moveSpeedIncreased);
+
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange - 0.5f)
+			currentState = State.Shooting;
+		else {
+			currentState = State.Patrol;
+		}
 
 	}
 	private void Shoot()
 	{
+		Debug.Log("I can Shoot");
 
+		float nodeToPlayer = Mathf.Abs(Vector2.Distance(activeNode.position, player.transform.position));
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange && nodeToPlayer >= shootingRange)
+			currentState = State.Patrol;
+		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange)
+			currentState = State.Chasing;
 	}
 
+	/// <summary>
+	/// This method shoots a ray and returns if the collider hitted is the player.
+	/// </summary>
+	/// <param name="pos"></param>
+	/// <param name="direction"></param>
+	/// <param name="range"></param>
+	/// <param name="objetiveTag"></param>
+	/// <param name="debugColor"></param>
+	/// <returns></returns>
 	private bool InRange(Transform pos, Vector2 direction, float range, string objetiveTag, Color debugColor)
 	{
 		
@@ -97,20 +157,20 @@ public class Waitress : MonoBehaviour {
 
 		if (hit.collider != null && hit.collider.tag == objetiveTag)
 		{
-			//Debug.Log("Player in Range");
 			return true;
 		}
 		else
 		{
-			//Debug.Log("Player is not in Range");
 			return false;
 		}
 	}
 
+	/// <summary>
+	/// This method simply flips the sprite localscale.
+	/// </summary>
 	private void FlipSprite() {
 		transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
 		direction *= -1;
 	}
-
 	#endregion
 }
