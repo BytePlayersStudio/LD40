@@ -47,7 +47,6 @@ public class ScrollController : MonoBehaviour {
 
     private void Jump()
     {
-        Debug.Log("Jumping");
         _rb.velocity = new Vector3(_rb.velocity.x, 0f);
         _rb.AddForce(new Vector2(0f, jumpForce));
 
@@ -64,7 +63,6 @@ public class ScrollController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Platform")
         {
-            Debug.Log("Inside");
             _isJumping = false;
         }
     }
