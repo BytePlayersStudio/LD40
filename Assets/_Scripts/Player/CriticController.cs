@@ -9,7 +9,8 @@ public class CriticController : MonoBehaviour {
     public GameObject criticBullet;
     public Transform bulletSpawn;
 
-    private PlayerController _pc;    
+    private PlayerController _pc;
+    private ScrollController _sc;
 
     #endregion
 
@@ -18,6 +19,7 @@ public class CriticController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _pc = GetComponent<PlayerController>();
+        _sc = GetComponent<ScrollController>();
     }
 	
 	// Update is called once per frame
@@ -38,9 +40,12 @@ public class CriticController : MonoBehaviour {
         _pc.currentCriticP = 0;
         var bullet = (GameObject)Instantiate(criticBullet, bulletSpawn.position, bulletSpawn.rotation);
 
-        // Get orientation of player
+        // Get orientation of player (-1 Left, 1 Right)
+        int currentHorientation = 1;
+        if (!_sc.facingRight)
+            currentHorientation = -1;
 
-        bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(1 * transform.localScale.x, 1) * 400 * 10);
+        bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(currentHorientation * 10 * transform.localScale.x, 1) * 400 * 10);
         Destroy(bullet, 2.0f);
     }
 

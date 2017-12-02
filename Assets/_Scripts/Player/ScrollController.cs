@@ -9,11 +9,13 @@ public class ScrollController : MonoBehaviour {
     private Rigidbody2D _rb;
     private PlayerController _pc;
     private bool _isJumping;
-    private bool _facingRight;
     private int _currentLVL;
 
     public float speed;
     public float jumpForce;
+
+    [HideInInspector]
+    public bool facingRight;
 
     #endregion
 
@@ -26,8 +28,10 @@ public class ScrollController : MonoBehaviour {
          */
         _rb = GetComponent<Rigidbody2D>();
         _pc = GetComponent<PlayerController>();
+
         _isJumping = false;
-        _facingRight = true;
+        facingRight = true;
+
         _currentLVL = 0;
 	}
 	
@@ -71,14 +75,14 @@ public class ScrollController : MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime, _rb.velocity.y);
-            if (!_facingRight)
+            if (!facingRight)
                 Flip();
 
         }
         else if (Input.GetKey(KeyCode.A))
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime * -1, _rb.velocity.y);
-            if (_facingRight)
+            if (facingRight)
                 Flip();
         }
         else
@@ -103,7 +107,7 @@ public class ScrollController : MonoBehaviour {
     // Flips the Player when he tries to change his direction
     private void Flip()
     {
-        _facingRight = !_facingRight;
+        facingRight = !facingRight;
         transform.Rotate(0, 180, 0, Space.Self);
     }
 
