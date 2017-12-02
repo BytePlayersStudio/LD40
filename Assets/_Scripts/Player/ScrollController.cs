@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,16 +9,18 @@ public class ScrollController : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
+	Transform groundCheck;
     
 	// Use this for initialization
 	void Start () {
         _rb = GetComponent<Rigidbody2D>();
-        _isJumping = false;        
+        _isJumping = false;
+		groundCheck = transform.GetChild(1).transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
             Jump();
         }
@@ -48,4 +50,7 @@ public class ScrollController : MonoBehaviour {
         if (collision.gameObject.tag == "Platform")
             _isJumping = false;
     }
+
+
+
 }
