@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class PauseMenuController : MonoBehaviour {
 
+    #region Variables
+
     private bool _paused;
     private float _realTimeScale;
 
     public GameObject pauseMenu;
 
-	// Use this for initialization
-	void Start () {
+    #endregion
+
+    #region Unity Functions
+
+    // Use this for initialization
+    void Start () {
         _paused = false;
 	}
 	
@@ -30,6 +36,10 @@ public class PauseMenuController : MonoBehaviour {
         }
 	}
 
+    #endregion
+
+    #region Custom Regions
+
     public void ShowPauseMenu()
     {
         _paused = true;
@@ -41,4 +51,6 @@ public class PauseMenuController : MonoBehaviour {
         _paused = false;
         pauseMenu.SetActive(false);
     }
+
+    #endregion
 }
