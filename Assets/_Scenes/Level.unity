@@ -226,7 +226,7 @@ RectTransform:
   m_GameObject: {fileID: 190874999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.022214485, y: 0.022214485, z: 0.022214485}
+  m_LocalScale: {x: 0.013297046, y: 0.013297046, z: 0.013297046}
   m_Children:
   - {fileID: 1122328482}
   - {fileID: 1006058348}
@@ -555,7 +555,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!1 &1165006251
 GameObject:
@@ -1073,6 +1073,7 @@ GameObject:
   - component: {fileID: 1859531845}
   - component: {fileID: 1859531844}
   - component: {fileID: 1859531843}
+  - component: {fileID: 1859531847}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1142,6 +1143,18 @@ Transform:
   m_Father: {fileID: 87946764}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1859531847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1859531842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21b89d1df90d424e87b1328e5f468f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1846909386}
 --- !u!1 &2058303205
 GameObject:
   m_ObjectHideFlags: 0

@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 502484504}
   - component: {fileID: 502484505}
   m_Layer: 0
-  m_Name: w
+  m_Name: waitress_logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,9 @@ MonoBehaviour:
   visionRange: 0
   node1: {fileID: 0}
   node2: {fileID: 0}
-  moveSpeed: 0
+  moveSpeed: 1
+  isInRange: 0
+  canShoot: 0
 --- !u!1 &1020856707
 GameObject:
   m_ObjectHideFlags: 0
