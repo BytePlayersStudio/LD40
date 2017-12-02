@@ -45,6 +45,10 @@ public class Waitress : MonoBehaviour {
 
 
 	public bool facingRight;
+	//Shooting mechanics
+	public GameObject bulletPrefab;
+	public Transform bulletSpawn;
+	float bulletSpeed;
 	#endregion
 
 	#region Unity Methods
@@ -79,6 +83,7 @@ public class Waitress : MonoBehaviour {
 			ApproachPlayer();
 		if (currentState == State.Shooting)
 			Shoot();
+		Debug.Log(currentState.ToString());
 	}
 
 	void FixedUpdate()
@@ -86,8 +91,6 @@ public class Waitress : MonoBehaviour {
 		isInRange = InRange(transform,direction, visionRange,"Player", Color.green);
 		canShoot = InRange(transform, direction, shootingRange, "Player", Color.red);
 		distanceFromPlayer = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
-
-
 	}
 	#endregion
 
@@ -111,10 +114,10 @@ public class Waitress : MonoBehaviour {
 			activeNode = node1;
 		}
 
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange)
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange && canShoot)
 			currentState = State.Shooting;
 		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange
-			 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange)
+			 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange && isInRange)
 			currentState = State.Chasing;
 	}
 
@@ -122,7 +125,7 @@ public class Waitress : MonoBehaviour {
 	{
 		transform.Translate(direction * Time.deltaTime * moveSpeedIncreased);
 
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange - 0.5f)
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange - 0.5f && canShoot)
 			currentState = State.Shooting;
 		else {
 			currentState = State.Patrol;
@@ -131,12 +134,16 @@ public class Waitress : MonoBehaviour {
 	}
 	private void Shoot()
 	{
-		Debug.Log("I can Shoot");
+		//Debug.Log("I can Shoot");
+		var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.forward * bulletSpeed;
+		Destroy(bullet, 2.0f);
+
 
 		float nodeToPlayer = Mathf.Abs(Vector2.Distance(activeNode.position, player.transform.position));
 		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange && nodeToPlayer >= shootingRange)
 			currentState = State.Patrol;
-		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange)
+		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange && isInRange)
 			currentState = State.Chasing;
 	}
 
