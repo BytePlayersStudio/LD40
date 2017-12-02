@@ -7,8 +7,10 @@ public class ScrollController : MonoBehaviour {
     #region Variables
 
     private Rigidbody2D _rb;
+    private PlayerController _pc;
     private bool _isJumping;
     private bool _facingRight;
+    private int _currentLVL;
 
     public float speed;
     public float jumpForce;
@@ -23,8 +25,10 @@ public class ScrollController : MonoBehaviour {
          * We are supposing that the player ALWAYS spawns facing Right
          */
         _rb = GetComponent<Rigidbody2D>();
+        _pc = GetComponent<PlayerController>();
         _isJumping = false;
         _facingRight = true;
+        _currentLVL = 0;
 	}
 	
 	void Update () {
@@ -35,7 +39,25 @@ public class ScrollController : MonoBehaviour {
         {
             Jump();
         }
-	}
+
+        // The player reachs Lvl 2 of fatness
+        if (_pc.fatness == 2 && _currentLVL != 2)
+        {
+            // The player cannot jump and it's too slow
+            jumpForce = 0;
+            speed = (speed / 3) * 2;
+            _currentLVL = 2;
+        }
+        // The player reachs Lvl 1 of fatness
+        else if (_pc.fatness == 1 && _currentLVL != 1)
+        {
+            // Velocity and jump force decreases 
+            jumpForce /= 2;
+            speed = (speed / 3) * 2;
+            _currentLVL = 1;
+        }
+
+    }
 
     private void FixedUpdate()
     {
