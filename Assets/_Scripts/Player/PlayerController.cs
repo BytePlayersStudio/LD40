@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     #region Variables
     
     private int _EnemyTime;
     private int _fatnessLvl1;
     private int _fatnessLvl2;
 
-    public int enemyContactTime;
+    public int currentCriticP;
     public int currentFatPoints;
+
+    public int enemyContactTime;
     public int maxFatPoints;
+    public int maxCriticPercentage;
 
     [HideInInspector]
     public int fatness;
+    [HideInInspector]
+    public bool isCriticReady;
 
     #endregion
 
@@ -30,6 +34,10 @@ public class PlayerController : MonoBehaviour
 
         _fatnessLvl1 = maxFatPoints / 3;
         _fatnessLvl2 = _fatnessLvl1 * 2;
+
+        isCriticReady = false;
+
+        StartCoroutine(addCriticPercentage());
     }
 
     void Update()
@@ -59,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     #region Custom Functions
 
-    // If currentFatPoints is higher than the maximum, is Dead
+    // If currentFatPoints is higher than maxFatPoints, is Dead
     private bool IsAlive()
     {
         if (currentFatPoints >= maxFatPoints)
@@ -71,9 +79,8 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D col)
     {
         ++_EnemyTime;
-        Debug.Log("Choca");
 
-        if (col.gameObject.tag == "Enemy" && _EnemyTime == enemyContactTime)
+        if (col.gameObject.tag == "Enemy" && _EnemyTime >= enemyContactTime)
         {
             ++currentFatPoints;
             _EnemyTime = 0;
@@ -82,4 +89,27 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Coroutines
+    // This courutine runs always, increasing the value of "Critic Percentage"
+    IEnumerator addCriticPercentage()
+    {
+        while (true)
+        {
+            if (currentCriticP < maxCriticPercentage)
+            {
+                currentCriticP += 5;
+                if (isCriticReady)
+                    isCriticReady = false;
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                if (!isCriticReady)
+                    isCriticReady = true;
+                yield return null;
+            }
+        }
+    }
+
+    #endregion
 }
