@@ -48,7 +48,9 @@ public class Waitress : MonoBehaviour {
 	//Shooting mechanics
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
-	float bulletSpeed;
+	public float bulletSpeed;
+	private float lastShot;
+	public float DelayBetweenBullets = 1;
 	#endregion
 
 	#region Unity Methods
@@ -66,10 +68,12 @@ public class Waitress : MonoBehaviour {
 		if (moveSpeed == 0) moveSpeed = 10.0f;
 
 		if(rb == null) rb = transform.GetComponent<Rigidbody2D>();
-
+		if (DelayBetweenBullets == 0) DelayBetweenBullets = 1.0f;
 		direction = new Vector2(transform.localScale.x, 0);
 		moveSpeedIncreased = moveSpeed * speedIncreaseFactor;
 		activeNode = node1;
+
+		lastShot = Time.time;
 
 		facingRight = true;
 		currentState = State.Patrol;
@@ -135,9 +139,14 @@ public class Waitress : MonoBehaviour {
 	private void Shoot()
 	{
 		//Debug.Log("I can Shoot");
-		var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.forward * bulletSpeed;
-		Destroy(bullet, 2.0f);
+		if (Time.time - lastShot > DelayBetweenBullets)
+		{
+			var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+			bullet.GetComponent<Rigidbody2D>().AddForce(transform.localScale * bulletSpeed * 10);
+			Destroy(bullet, 2.0f);
+
+			lastShot = Time.time;
+		}
 
 
 		float nodeToPlayer = Mathf.Abs(Vector2.Distance(activeNode.position, player.transform.position));
