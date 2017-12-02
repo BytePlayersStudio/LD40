@@ -22,6 +22,7 @@ public class Waitress : MonoBehaviour {
 	// We also need a vision range for the enemies and shoot a ray to check if they can see the player
 	public float shootingRange;
 	public float visionRange;
+	public float backDetectionRange;
 	Vector2 direction;
 
 	//Nodes for the patrol behavior
@@ -45,6 +46,7 @@ public class Waitress : MonoBehaviour {
 
 	private bool isInRange;
 	private bool canShoot;
+	public bool backDetection;
 
 
 	private bool facingRight;
@@ -94,7 +96,6 @@ public class Waitress : MonoBehaviour {
 		{
 			isAttacking = false;
 			Patrol();
-			setAnimations();
 		}
 		if (currentState == State.Chasing)
 		{
@@ -114,12 +115,16 @@ public class Waitress : MonoBehaviour {
 	{
 		isInRange = InRange(transform,direction, visionRange,"Player", Color.green);
 		canShoot = InRange(transform, direction, shootingRange, "Player", Color.red);
+		backDetection = InRange(transform, -direction, backDetectionRange, "Player", Color.blue);
+
 		distanceFromPlayer = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
 	}
 	#endregion
 
 	#region Custom Functions
-
+	/// <summary>
+	/// Set the animation variables.
+	/// </summary>
 	void setAnimations()
 	{
 		anim_controller.SetBool("isAttacking", isAttacking);
@@ -142,24 +147,32 @@ public class Waitress : MonoBehaviour {
 			activeNode = node1;
 		}
 
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange && canShoot)
+		if (backDetection) {
+			FlipSprite();
+		}
+
+		if (canShoot)
 			currentState = State.Shooting;
-		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange
-			 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange && isInRange)
+		if (isInRange && !canShoot)
 			currentState = State.Chasing;
 	}
-
+	/// <summary>
+	/// Approach Player
+	/// </summary>
 	private void ApproachPlayer()
 	{
 		transform.Translate(direction * Time.deltaTime * moveSpeedIncreased);
 
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange - 0.5f && canShoot)
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange  || canShoot)
 			currentState = State.Shooting;
-		else {
+		if(Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) > shootingRange)
 			currentState = State.Patrol;
-		}
+		
 
 	}
+	/// <summary>
+	/// Makes the enemy shoot
+	/// </summary>
 	private void Shoot()
 	{
 		//Debug.Log("I can Shoot");
@@ -174,11 +187,12 @@ public class Waitress : MonoBehaviour {
 		}
 
 
-		float nodeToPlayer = Mathf.Abs(Vector2.Distance(activeNode.position, player.transform.position));
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange && nodeToPlayer >= shootingRange)
+		//float nodeToPlayer = Mathf.Abs(Vector2.Distance(activeNode.position, player.transform.position));
+		if (!isInRange && !canShoot)
 			currentState = State.Patrol;
-		else if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange && isInRange)
+		if (isInRange && !canShoot)
 			currentState = State.Chasing;
+		
 	}
 
 	/// <summary>
@@ -192,9 +206,18 @@ public class Waitress : MonoBehaviour {
 	/// <returns></returns>
 	private bool InRange(Transform pos, Vector2 direction, float range, string objetiveTag, Color debugColor)
 	{
-		
-		RaycastHit2D hit = Physics2D.Raycast(pos.position, direction, range);
-		Debug.DrawRay(pos.position, direction * range, debugColor);
+		Vector3 updatedPos;
+		if (facingRight)
+		{
+			updatedPos = new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z);
+		}
+		else
+		{
+			updatedPos = new Vector3(pos.position.x - 0.5f, pos.position.y, pos.position.z);
+		}
+
+		RaycastHit2D hit = Physics2D.Raycast(updatedPos, direction, range);
+		Debug.DrawRay(updatedPos, direction * range, debugColor);
 
 		if (hit.collider != null && hit.collider.tag == objetiveTag)
 		{
