@@ -153,7 +153,8 @@ public class Waitress : MonoBehaviour {
 
 		if (canShoot)
 			currentState = State.Shooting;
-		if (isInRange && !canShoot)
+		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange
+			 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange && isInRange && !canShoot)
 			currentState = State.Chasing;
 	}
 	/// <summary>
@@ -165,7 +166,7 @@ public class Waitress : MonoBehaviour {
 
 		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange  || canShoot)
 			currentState = State.Shooting;
-		if(Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) > shootingRange)
+		if(Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) > shootingRange || !canShoot)
 			currentState = State.Patrol;
 		
 
