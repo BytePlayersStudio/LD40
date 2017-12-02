@@ -5,7 +5,8 @@ using UnityEngine;
 public class ScrollController : MonoBehaviour {
 
     private Rigidbody2D _rb;
-    public bool _isJumping;
+    private bool _isJumping;
+    private bool _facingRight;
 
     public float speed;
     public float jumpForce;
@@ -13,6 +14,7 @@ public class ScrollController : MonoBehaviour {
 	void Start () {
         _rb = GetComponent<Rigidbody2D>();
         _isJumping = false;
+        _facingRight = true;
 	}
 	
 	void Update () {
@@ -27,10 +29,15 @@ public class ScrollController : MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime, _rb.velocity.y);
+            if (!_facingRight)
+                Flip();
+
         }
         else if (Input.GetKey(KeyCode.A))
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime * -1, _rb.velocity.y);
+            if (_facingRight)
+                Flip();
         }
         else
         {
@@ -45,6 +52,12 @@ public class ScrollController : MonoBehaviour {
         _rb.AddForce(new Vector2(0f, jumpForce));
 
         _isJumping = true;
+    }
+
+    private void Flip()
+    {
+        _facingRight = !_facingRight;
+        transform.Rotate(0, 180, 0, Space.Self);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
