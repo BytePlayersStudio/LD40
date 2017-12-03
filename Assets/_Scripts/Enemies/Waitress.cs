@@ -201,6 +201,7 @@ public class Waitress : MonoBehaviour {
 	private bool InRange(Transform pos, Vector2 direction, float range, string objetiveTag, Color debugColor)
 	{
 		Vector3 updatedPos;
+		Debug.Log("facing right is:" + facingRight);
 		if (facingRight)
 		{
 			updatedPos = new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z);
@@ -235,11 +236,13 @@ public class Waitress : MonoBehaviour {
 		if (waipointID == 0)
 		{
 			waipointID = 1;
+			facingRight = false;
 			FlipSprite();
 		}
 		else
 		{
 			waipointID = 0;
+			facingRight = true;
 			FlipSprite();
 		}
 	}
