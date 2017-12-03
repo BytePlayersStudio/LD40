@@ -8,13 +8,16 @@ public class ScrollController : MonoBehaviour {
 
     private Rigidbody2D _rb;
     private PlayerController _pc;
+    private CriticController _cc;
+
     private bool _isJumping;
     private int _currentLVL;
     private bool _isWokingOut;
+    private bool _isCriticizing;
 
     public float speed;
     public float jumpForce;
-    public int workOutDecrement;
+    public int workOutIncrement;
     public Animator anim;
 
     [HideInInspector]
@@ -31,6 +34,7 @@ public class ScrollController : MonoBehaviour {
          */
         _rb = GetComponent<Rigidbody2D>();
         _pc = GetComponent<PlayerController>();
+        _cc = GetComponent<CriticController>();
 
         _isJumping = false;
         _isWokingOut = false;
@@ -43,12 +47,17 @@ public class ScrollController : MonoBehaviour {
         /*
          * When we push down the 'Space' key, the player will jump
          */
+
+        _cc.isCriticizing = _isCriticizing;
+
 		if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
             Jump();
         }
 
         anim.SetFloat("speed", Mathf.Abs(_rb.velocity.x));
+        anim.SetBool("isJumping", _isJumping);
+        anim.SetBool("isCriticizing", _isCriticizing);
 
         // The player reachs Lvl 2 of fatness
         if (_pc.fatness == 2 && _currentLVL != 2)
@@ -138,17 +147,17 @@ public class ScrollController : MonoBehaviour {
     // This courutine, decrease currentFatPoints when doing workout
     IEnumerator WorkOut()
     {
-        if (_pc.currentFatPoints >= workOutDecrement)
+        if (_pc.currentFatPoints >= workOutIncrement)
         {
             _isWokingOut = true;
                 
             // Start WorkOut Animation & block player
 
-            _pc.currentFatPoints -= workOutDecrement;
+            _pc.currentFatPoints -= workOutIncrement;
             yield return new WaitForSeconds(1);
             _isWokingOut = false;
         }
-        else if(_pc.currentFatPoints < workOutDecrement && _pc.currentFatPoints > 0)
+        else if(_pc.currentFatPoints < workOutIncrement && _pc.currentFatPoints > 0)
         {
             _isWokingOut = true;
 

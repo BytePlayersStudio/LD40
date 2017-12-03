@@ -12,6 +12,9 @@ public class CriticController : MonoBehaviour {
     private PlayerController _pc;
     private ScrollController _sc;
 
+    [HideInInspector]
+    public bool isCriticizing;
+
     #endregion
 
     #region Unity Functions
@@ -20,13 +23,17 @@ public class CriticController : MonoBehaviour {
     void Start () {
         _pc = GetComponent<PlayerController>();
         _sc = GetComponent<ScrollController>();
+
+        isCriticizing = false;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
         if (Input.GetKey(KeyCode.E) && _pc.isCriticReady)
         {
+            isCriticizing = true;
             ShootCritic();
+            isCriticizing = false;
         }
 	}
 
@@ -36,7 +43,7 @@ public class CriticController : MonoBehaviour {
 
     // Shoot a bullet aka Critic
     void ShootCritic()
-    {   
+    {
         _pc.currentCriticP = 0;
         var bullet = (GameObject)Instantiate(criticBullet, bulletSpawn.position, bulletSpawn.rotation);
 
@@ -46,7 +53,7 @@ public class CriticController : MonoBehaviour {
             currentHorientation = -1;
 
         bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(currentHorientation * 10 * transform.localScale.x, 1) * 400 * 10);
-        Destroy(bullet, 2.0f);
+        Destroy(bullet, 2.0f);        
     }
 
     #endregion
