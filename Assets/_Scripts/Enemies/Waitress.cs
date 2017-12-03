@@ -64,6 +64,10 @@ public class Waitress : MonoBehaviour {
 	//Animator Variables
 	Animator anim_controller;
 	bool isAttacking;
+
+    //Stat Variables
+    public int maxLife;
+    private int _currentLife;
 	#endregion
 
 	#region Unity Methods
@@ -88,6 +92,15 @@ public class Waitress : MonoBehaviour {
 
 		facingRight = true;
 		currentState = State.Patrol;
+                
+        if (maxLife == 0) {
+            _currentLife = 1;
+            maxLife = 1;
+        }
+        else
+        {
+            _currentLife = maxLife;
+        }
 
 		anim_controller = transform.GetComponentInChildren<Animator>();
 		shotSound = GetComponent<AudioSource>();
@@ -186,15 +199,20 @@ public class Waitress : MonoBehaviour {
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-			Debug.Log("OnTriggerEnter " + samePosition);
+			//Debug.Log("OnTriggerEnter " + samePosition);
 			samePosition = true;
 		}
+
+        if (collision.gameObject.tag == "CriticBullet")
+        {
+            Hitted();
+        }
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-			Debug.Log("OnTriggerExit " + samePosition);
+			//Debug.Log("OnTriggerExit " + samePosition);
 			samePosition = false;
 		}
 	}
@@ -248,7 +266,7 @@ public class Waitress : MonoBehaviour {
 		}
 
 		RaycastHit2D hit = Physics2D.Raycast(updatedPos, direction, range);
-		Debug.DrawRay(updatedPos, direction * range, debugColor);
+		//Debug.DrawRay(updatedPos, direction * range, debugColor);
 
 		if (hit.collider != null && hit.collider.tag == objetiveTag)
 		{
@@ -282,5 +300,13 @@ public class Waitress : MonoBehaviour {
 			FlipSprite();
 		}
 	}
+
+    private void Hitted()
+    {
+        --_currentLife;
+        Debug.Log(_currentLife);
+        if(_currentLife <= 0 )
+            Destroy(transform.parent.gameObject);
+    }
 	#endregion
 }

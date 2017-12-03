@@ -9,8 +9,11 @@ public class CriticController : MonoBehaviour {
     public GameObject criticBullet;
     public Transform bulletSpawn;
 
+    public AudioClip[] shoot;
+
     private PlayerController _pc;
     private ScrollController _sc;
+    private AudioSource _as;
 
     [HideInInspector]
     public bool isCriticizing;
@@ -23,6 +26,7 @@ public class CriticController : MonoBehaviour {
     void Start () {
         _pc = GetComponent<PlayerController>();
         _sc = GetComponent<ScrollController>();
+        _as = GetComponent<AudioSource>();
 
         isCriticizing = false;
     }
@@ -45,7 +49,12 @@ public class CriticController : MonoBehaviour {
     void ShootCritic()
     {
         _pc.currentCriticP = 0;
+
+        int index = Random.Range(0, shoot.Length);
+        _as.clip = shoot[index];
+
         var bullet = (GameObject)Instantiate(criticBullet, bulletSpawn.position, bulletSpawn.rotation);
+        _as.Play();
 
         // Get orientation of player (-1 Left, 1 Right)
         int currentHorientation = 1;

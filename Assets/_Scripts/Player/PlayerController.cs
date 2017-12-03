@@ -19,8 +19,9 @@ public class PlayerController : MonoBehaviour
     public int maxCriticPercentage;
 	public int foodFatnessIncrease;
 
+    public AudioClip eating;
 
-    //[HideInInspector]
+    [HideInInspector]
     public int fatness;
     [HideInInspector]
     public bool isCriticReady;
@@ -101,8 +102,9 @@ public class PlayerController : MonoBehaviour
 		if (collision.gameObject.tag == "Bullet")
 		{
 			currentFatPoints += foodFatnessIncrease;
-			GetComponent<AudioSource>().Play();
-			Destroy(collision.gameObject);
+            GetComponent<AudioSource>().clip = eating;
+            GetComponent<AudioSource>().Play();
+            Destroy(collision.gameObject);
 		}
 	}
 	#endregion
