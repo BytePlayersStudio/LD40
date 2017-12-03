@@ -87,6 +87,8 @@ public class Waitress : MonoBehaviour {
 		currentState = State.Patrol;
 
 		anim_controller = transform.GetComponentInChildren<Animator>();
+
+		//Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 	}
 
 	void Update ()
