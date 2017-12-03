@@ -41,7 +41,9 @@ public class Waitress : MonoBehaviour {
 
 	public GameObject player;
 	Vector2 directionToPlayer;
-
+	//Vector2 playerCurrPosition;
+	//public float playerAllowedSpace;
+	bool samePosition;
 	//Detection variables
 
 	private bool isInRange;
@@ -57,6 +59,7 @@ public class Waitress : MonoBehaviour {
 	public float bulletSpeed;
 	private float lastShot;
 	public float DelayBetweenBullets = 1;
+	AudioSource shotSound;
 
 	//Animator Variables
 	Animator anim_controller;
@@ -80,14 +83,14 @@ public class Waitress : MonoBehaviour {
 
 		direction = new Vector2(transform.localScale.x, 0);
 		moveSpeedIncreased = moveSpeed * speedIncreaseFactor;
-
+		samePosition = false;
 		lastShot = Time.time;
 
 		facingRight = true;
 		currentState = State.Patrol;
 
 		anim_controller = transform.GetComponentInChildren<Animator>();
-
+		shotSound = GetComponent<AudioSource>();
 		//Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 	}
 
@@ -135,15 +138,18 @@ public class Waitress : MonoBehaviour {
 	/// </summary>
 	private void Patrol()
 	{
-		if (Mathf.Abs(Vector2.Distance(waipoints[waipointID].position, transform.position)) < .5f)
+		if (Mathf.Abs(Vector2.Distance(waipoints[waipointID].position, transform.position)) < .5f && !samePosition)
 		{
 			changeWaypoint();
 		}
 		//Debug.Log(waipointID);
-		Vector2 translation = Vector2.MoveTowards(this.transform.position, waipoints[waipointID].transform.position, moveSpeed * Time.deltaTime);
-		transform.position = new Vector2(translation.x, transform.position.y); ;
-
-		if (backDetection) {
+		//playerCurrPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+		if (!samePosition)
+		{
+			Vector2 translation = Vector2.MoveTowards(this.transform.position, waipoints[waipointID].transform.position, moveSpeed * Time.deltaTime);
+			transform.position = new Vector2(translation.x, transform.position.y);
+		}
+		if (backDetection && !samePosition) {
 			changeWaypoint();
 			currentState = State.Chasing;
 		}
@@ -159,9 +165,12 @@ public class Waitress : MonoBehaviour {
 	/// </summary>
 	private void ApproachPlayer()
 	{
-		Vector2 translation = Vector2.MoveTowards(this.transform.position, player.transform.position, moveSpeedIncreased * Time.deltaTime);
-		this.transform.position = new Vector2(translation.x, transform.position.y);
-
+		if (!samePosition)
+		{
+			Vector2 translation = Vector2.MoveTowards(this.transform.position, player.transform.position, moveSpeedIncreased * Time.deltaTime);
+			this.transform.position = new Vector2(translation.x, transform.position.y);
+		}
+		//Debug.Log(currentState.ToString());
 		//if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange  || canShoot)
 		//	currentState = State.Shooting;
 		//if(Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) > shootingRange || !canShoot)
@@ -172,6 +181,22 @@ public class Waitress : MonoBehaviour {
 			currentState = State.Patrol;
 		}
 
+	}
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Player")
+		{
+			Debug.Log("OnTriggerEnter " + samePosition);
+			samePosition = true;
+		}
+	}
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Player")
+		{
+			Debug.Log("OnTriggerExit " + samePosition);
+			samePosition = false;
+		}
 	}
 	/// <summary>
 	/// Makes the enemy shoot
@@ -187,7 +212,7 @@ public class Waitress : MonoBehaviour {
 			bullet.transform.SetParent(bulletParent);
 			bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(1 * transform.localScale.x,1) * bulletSpeed * 10);
 			Destroy(bullet, 2.0f);
-
+			shotSound.Play();
 			lastShot = Time.time;
 		}
 

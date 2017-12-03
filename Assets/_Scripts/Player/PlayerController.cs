@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public int enemyContactTime;
     public int maxFatPoints;
     public int maxCriticPercentage;
+	public int foodFatnessIncrease;
+
 
     [HideInInspector]
     public int fatness;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         _fatnessLvl2 = _fatnessLvl1 * 2;
 
         isCriticReady = false;
+		if (foodFatnessIncrease == 0) foodFatnessIncrease = 10;
 
         StartCoroutine(addCriticPercentage());
     }
@@ -87,11 +90,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #endregion
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Bullet")
+		{
+			currentFatPoints += 20;
+			Destroy(collision.gameObject);
+		}
+	}
+	#endregion
 
-    #region Coroutines
-    // This courutine runs always, increasing the value of "Critic Percentage"
-    IEnumerator addCriticPercentage()
+	#region Coroutines
+	// This courutine runs always, increasing the value of "Critic Percentage"
+	IEnumerator addCriticPercentage()
     {
         while (true)
         {
