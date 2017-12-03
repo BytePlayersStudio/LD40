@@ -13,6 +13,7 @@ public class ScrollController : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
+    public Animator anim;
 
     [HideInInspector]
     public bool facingRight;
@@ -43,6 +44,8 @@ public class ScrollController : MonoBehaviour {
         {
             Jump();
         }
+
+        anim.SetFloat("speed", Mathf.Abs(_rb.velocity.x));
 
         // The player reachs Lvl 2 of fatness
         if (_pc.fatness == 2 && _currentLVL != 2)
