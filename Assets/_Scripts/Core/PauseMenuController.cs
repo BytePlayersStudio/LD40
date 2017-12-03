@@ -7,7 +7,6 @@ public class PauseMenuController : MonoBehaviour {
     #region Variables
 
     private bool _paused;
-    private float _realTimeScale;
 
     public GameObject pauseMenu;
 
@@ -24,14 +23,12 @@ public class PauseMenuController : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown("Pause") && !_paused)
         {
-            _realTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             ShowPauseMenu();
         }
         else if (Input.GetButtonDown("Pause") && _paused)
         {
-            _realTimeScale = Time.timeScale;
-            Time.timeScale = _realTimeScale;
+            Time.timeScale = 1;
             HidePauseMenu();
         }
 	}
