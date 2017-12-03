@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 	public int foodFatnessIncrease;
 
     public AudioClip eating;
+    public GameObject gameOverMenu;
 
     [HideInInspector]
     public int fatness;
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             // GAME OVER MENU
+            GameOver();
         }
     }
 
@@ -83,6 +85,12 @@ public class PlayerController : MonoBehaviour
         if (currentFatPoints >= maxFatPoints)
             return false;
         return true;
+    }
+
+    private void GameOver()
+    {
+        gameOverMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     // If the player touches the trigger of an enemy, will gain Fatness

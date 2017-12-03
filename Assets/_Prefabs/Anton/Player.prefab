@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c567c9b2f6b894dbf4a3ce059de43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isCriticizing: 0
   speed: 300
   jumpForce: 650
   workOutIncrement: 5
@@ -237,12 +236,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCriticP: 25
-  currentFatPoints: 0
+  currentFatPoints: 90
   enemyContactTime: 10
   maxFatPoints: 100
   maxCriticPercentage: 25
   foodFatnessIncrease: 5
   eating: {fileID: 8300000, guid: 1ef262bd45ca8554b9a4da87c8c5f5fa, type: 3}
+  gameOverMenu: {fileID: 0}
   fatness: 0
   isCriticReady: 1
 --- !u!114 &114997669556608952

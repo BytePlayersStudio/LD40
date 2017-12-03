@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour {
 
     #region Custom Functions
-
+    
     // Loads the Level Scene
     public void LoadLevel()
     {
