@@ -263,8 +263,12 @@ MonoBehaviour:
   speedIncreaseFactor: 2
   player: {fileID: 0}
   backDetection: 0
-  bulletPrefab: {fileID: 1521651104425040, guid: ff4667122bf7e5e42b69a012942eca55,
-    type: 2}
+  bulletPrefabs:
+  - {fileID: 1774928207793116, guid: 11fce978d303d2044a43493000788984, type: 2}
+  - {fileID: 1926182147599258, guid: ee0a2ac6375bc124e9b55121ab87e0ae, type: 2}
+  - {fileID: 1438921186055944, guid: 21b121abd3908bc45b2e3c27e9212388, type: 2}
+  - {fileID: 1931691985161496, guid: 2191349d82eb87447a28a037bc7e4a9d, type: 2}
+  - {fileID: 1621190004473598, guid: 3ccb16542b3d3c94a92cd4ecd8a7233b, type: 2}
   bulletSpawn: {fileID: 4813702600564144}
   bulletSpeed: 400
   DelayBetweenBullets: 1

@@ -51,7 +51,8 @@ public class Waitress : MonoBehaviour {
 
 	private bool facingRight;
 	//Shooting mechanics
-	public GameObject bulletPrefab;
+	public Transform bulletParent;
+	public GameObject[] bulletPrefabs;
 	public Transform bulletSpawn;
 	public float bulletSpeed;
 	private float lastShot;
@@ -75,6 +76,8 @@ public class Waitress : MonoBehaviour {
 
 		if(rb == null) rb = transform.GetComponent<Rigidbody2D>();
 		if (DelayBetweenBullets == 0) DelayBetweenBullets = 1.0f;
+		if (bulletParent == null) Debug.LogError("Bullet Parent not found. Set a parent for the bullets.");
+
 		direction = new Vector2(transform.localScale.x, 0);
 		moveSpeedIncreased = moveSpeed * speedIncreaseFactor;
 
@@ -104,7 +107,7 @@ public class Waitress : MonoBehaviour {
 			Shoot();
 		}
 		setAnimations();
-		Debug.Log(currentState.ToString());
+		//Debug.Log(currentState.ToString());
 	}
 
 	void FixedUpdate()
@@ -157,11 +160,12 @@ public class Waitress : MonoBehaviour {
 		Vector2 translation = Vector2.MoveTowards(this.transform.position, player.transform.position, moveSpeedIncreased * Time.deltaTime);
 		this.transform.position = new Vector2(translation.x, transform.position.y);
 
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange  || canShoot)
-			currentState = State.Shooting;
-		if(Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) > shootingRange || !canShoot)
-			currentState = State.Patrol;
-		
+		//if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange  || canShoot)
+		//	currentState = State.Shooting;
+		//if(Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) > shootingRange || !canShoot)
+		//	currentState = State.Patrol;
+		if (canShoot) currentState = State.Shooting;
+		if (!isInRange) currentState = State.Patrol;
 
 	}
 	/// <summary>
@@ -170,10 +174,12 @@ public class Waitress : MonoBehaviour {
 	private void Shoot()
 	{
 		//Debug.Log("I can Shoot");
+		GameObject bulletPrf;
+		bulletPrf = bulletPrefabs[Random.Range(0,bulletPrefabs.Length)];
 		if (Time.time - lastShot > DelayBetweenBullets)
 		{
-			var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-			
+			var bullet = (GameObject)Instantiate(bulletPrf, bulletSpawn.position, bulletSpawn.rotation);
+			bullet.transform.SetParent(bulletParent);
 			bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(1 * transform.localScale.x,1) * bulletSpeed * 10);
 			Destroy(bullet, 2.0f);
 
@@ -201,7 +207,7 @@ public class Waitress : MonoBehaviour {
 	private bool InRange(Transform pos, Vector2 direction, float range, string objetiveTag, Color debugColor)
 	{
 		Vector3 updatedPos;
-		Debug.Log("facing right is:" + facingRight);
+		//Debug.Log("facing right is:" + facingRight);
 		if (facingRight)
 		{
 			updatedPos = new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z);

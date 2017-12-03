@@ -226,7 +226,7 @@ RectTransform:
   m_GameObject: {fileID: 190874999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
+  m_LocalScale: {x: 0.003888025, y: 0.003888025, z: 0.003888025}
   m_Children:
   - {fileID: 1122328482}
   - {fileID: 1006058348}
@@ -335,6 +335,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4801051111496988, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.5255165
@@ -390,6 +395,36 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1870257932}
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1774928207793116, guid: 11fce978d303d2044a43493000788984,
+        type: 2}
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1926182147599258, guid: ee0a2ac6375bc124e9b55121ab87e0ae,
+        type: 2}
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1438921186055944, guid: 21b121abd3908bc45b2e3c27e9212388,
+        type: 2}
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 1931691985161496, guid: 2191349d82eb87447a28a037bc7e4a9d,
+        type: 2}
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 1621190004473598, guid: 3ccb16542b3d3c94a92cd4ecd8a7233b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
   m_IsPrefabParent: 0
