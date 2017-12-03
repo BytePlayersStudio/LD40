@@ -58,9 +58,7 @@ public class ScrollController : MonoBehaviour {
 	void Update () {
         /*
          * When we push down the 'Space' key, the player will jump
-         */
-
-        _cc.isCriticizing = _isCriticizing;
+         */         
 
 		if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
@@ -113,6 +111,7 @@ public class ScrollController : MonoBehaviour {
          * 
          * We are always checking player's orientation
          */
+
         if (Input.GetKey(KeyCode.D) && !_isWokingOut)
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime, _rb.velocity.y);
@@ -125,6 +124,11 @@ public class ScrollController : MonoBehaviour {
             _rb.velocity = new Vector2(speed * Time.deltaTime * -1, _rb.velocity.y);
             if (facingRight)
                 Flip();
+        }
+        else if (Input.GetKey(KeyCode.E) && !_isWokingOut && _pc.isCriticReady)
+        {
+            _cc.ShootCritic();
+            StartCoroutine(DelayShoot());
         }
         else
         {
@@ -199,6 +203,13 @@ public class ScrollController : MonoBehaviour {
             yield return new WaitForSeconds(0.5f);
             _isWokingOut = false;
         }
+    }
+
+    IEnumerator DelayShoot()
+    {
+        _isCriticizing = true;
+        yield return new WaitForSeconds(0.2f);
+        _isCriticizing = false;
     }
 
     #endregion

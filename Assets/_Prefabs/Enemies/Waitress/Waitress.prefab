@@ -354,7 +354,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4121049524921468}
   bulletSpeed: 400
   DelayBetweenBullets: 1
-  maxLife: 2
+  maxLife: 1
 --- !u!212 &212947814641091128
 SpriteRenderer:
   m_ObjectHideFlags: 1

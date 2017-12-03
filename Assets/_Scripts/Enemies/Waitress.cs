@@ -304,7 +304,6 @@ public class Waitress : MonoBehaviour {
     private void Hitted()
     {
         --_currentLife;
-        Debug.Log(_currentLife);
         if(_currentLife <= 0 )
             Destroy(transform.parent.gameObject);
     }

@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c567c9b2f6b894dbf4a3ce059de43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isCriticizing: 0
   speed: 300
   jumpForce: 650
   workOutIncrement: 5
@@ -266,7 +267,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c06d9cc61d0602646bc1e1312e12d4cb, type: 3}
   - {fileID: 8300000, guid: 9c866f8fb8182b645be059caa0a7ba8f, type: 3}
   - {fileID: 8300000, guid: aa77d9360bea4334d908f916c5b2b402, type: 3}
-  isCriticizing: 0
 --- !u!212 &212038981571123710
 SpriteRenderer:
   m_ObjectHideFlags: 1

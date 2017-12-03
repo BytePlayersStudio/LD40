@@ -15,9 +15,6 @@ public class CriticController : MonoBehaviour {
     private ScrollController _sc;
     private AudioSource _as;
 
-    [HideInInspector]
-    public bool isCriticizing;
-
     #endregion
 
     #region Unity Functions
@@ -27,26 +24,14 @@ public class CriticController : MonoBehaviour {
         _pc = GetComponent<PlayerController>();
         _sc = GetComponent<ScrollController>();
         _as = GetComponent<AudioSource>();
-
-        isCriticizing = false;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (Input.GetKey(KeyCode.E) && _pc.isCriticReady)
-        {
-            isCriticizing = true;
-            ShootCritic();
-            isCriticizing = false;
-        }
-	}
 
     #endregion
 
     #region Custom Functions
 
     // Shoot a bullet aka Critic
-    void ShootCritic()
+    public void ShootCritic()
     {
         _pc.currentCriticP = 0;
 
@@ -62,7 +47,7 @@ public class CriticController : MonoBehaviour {
             currentHorientation = -1;
 
         bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(currentHorientation * 10 * transform.localScale.x, 1) * 400 * 10);
-        Destroy(bullet, 2.0f);        
+        Destroy(bullet, 2.0f);
     }
 
     #endregion
