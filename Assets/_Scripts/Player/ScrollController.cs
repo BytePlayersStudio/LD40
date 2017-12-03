@@ -16,12 +16,18 @@ public class ScrollController : MonoBehaviour {
     private bool _isCriticizing;
 
     public float speed;
+	private float initialSpeed;
     public float jumpForce;
-    public int workOutIncrement;
+	private float initialJumpForce;
+	public int workOutIncrement;
     public Animator anim;
 
     [HideInInspector]
     public bool facingRight;
+
+	private bool isThin;
+	private bool isFat;
+	private bool isSuperFat;
 
     #endregion
 
@@ -39,8 +45,14 @@ public class ScrollController : MonoBehaviour {
         _isJumping = false;
         _isWokingOut = false;
         facingRight = true;
-        
         _currentLVL = 0;
+
+		isThin = true;
+		isFat = false;
+		isSuperFat = false;
+
+		initialSpeed = speed;
+		initialJumpForce = jumpForce;
 	}
 	
 	void Update () {
@@ -60,23 +72,37 @@ public class ScrollController : MonoBehaviour {
         anim.SetBool("isCriticizing", _isCriticizing);
         anim.SetBool("isWorkingOut", _isWokingOut);
 
-        // The player reachs Lvl 2 of fatness
-        if (_pc.fatness == 2 && _currentLVL != 2)
-        {
-            // The player cannot jump and it's too slow
-            jumpForce = 0;
-            speed = (speed / 3) * 2;
-            _currentLVL = 2;
-        }
-        // The player reachs Lvl 1 of fatness
-        else if (_pc.fatness == 1 && _currentLVL != 1)
-        {
-            // Velocity and jump force decreases 
-            jumpForce /= 2;
-            speed = (speed / 3) * 2;
-            _currentLVL = 1;
-        }
+		anim.SetBool("isThin", isThin);
+		anim.SetBool("isFat", isFat);
+		anim.SetBool("isSuperFat", isSuperFat);
 
+		// The player reachs Lvl 2 of fatness
+		if (_pc.fatness == 2 && _currentLVL != 2)
+		{
+			// The player cannot jump and it's too slow
+			jumpForce = 0;
+			speed = (initialSpeed / 3) * 2;
+			_currentLVL = 2;
+			changeFatnessAnimator(false, false, true);
+		}
+		// The player reachs Lvl 1 of fatness
+		if (_pc.fatness == 1 && _currentLVL != 1)
+		{
+			// Velocity and jump force decreases 
+			jumpForce = initialJumpForce / 2;
+			speed = (initialSpeed / 3) * 2;
+			_currentLVL = 1;
+			changeFatnessAnimator(false, true, false);
+		}
+		if (_pc.fatness == 0 && _currentLVL != 0)
+		{
+			jumpForce = initialJumpForce;
+			speed = initialSpeed ;
+			_currentLVL = 0;
+			changeFatnessAnimator(true, false, false);
+		}
+
+		Debug.Log("Fatness_points " + _pc.fatness + " ------ current Level " + _currentLVL);
     }
 
     private void FixedUpdate()
@@ -140,7 +166,18 @@ public class ScrollController : MonoBehaviour {
             _isJumping = false;            
         }
     }
-
+	/// <summary>
+	/// Sets the booleans of the animator to change states between fatness levels
+	/// </summary>
+	/// <param name="_isThin"></param>
+	/// <param name="_isFat"></param>
+	/// <param name="_isSuperFat"></param>
+	private void changeFatnessAnimator(bool _isThin, bool _isFat, bool _isSuperFat)
+	{
+		isThin = _isThin;
+		isFat = _isFat;
+		isSuperFat = _isSuperFat;
+	}
     #endregion
 
     #region Coroutines

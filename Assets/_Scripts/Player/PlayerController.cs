@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private int _EnemyTime;
     private int _fatnessLvl1;
     private int _fatnessLvl2;
+	private int _fatnessLvl0;
 
     public int currentCriticP;
     public int currentFatPoints;
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
 	public int foodFatnessIncrease;
 
 
-    [HideInInspector]
+    //[HideInInspector]
     public int fatness;
     [HideInInspector]
     public bool isCriticReady;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
         fatness = 0;
 
+		_fatnessLvl0 = 0;
         _fatnessLvl1 = maxFatPoints / 3;
         _fatnessLvl2 = _fatnessLvl1 * 2;
 
@@ -48,16 +50,20 @@ public class PlayerController : MonoBehaviour
         // If the player is alive...
         if (IsAlive())
         {
-            if (currentFatPoints >= _fatnessLvl2)
-            {
-                // The player reachs Lvl 1 of fatness
-                fatness = 2;
-            }
-            else if(currentFatPoints >= _fatnessLvl1)
-            {
-                // The player reachs Lvl 2 of fatness
-                fatness = 1;
-            }
+			if (currentFatPoints >= _fatnessLvl2)
+			{
+				// The player reachs Lvl 1 of fatness
+				fatness = 2;
+			}
+			else if (currentFatPoints >= _fatnessLvl1)
+			{
+				// The player reachs Lvl 2 of fatness
+				fatness = 1;
+			}
+			else
+			{
+				fatness = 0;
+			}
         }
         // If not...
         else
@@ -94,7 +100,8 @@ public class PlayerController : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Bullet")
 		{
-			currentFatPoints += 20;
+			currentFatPoints += foodFatnessIncrease;
+			GetComponent<AudioSource>().Play();
 			Destroy(collision.gameObject);
 		}
 	}
