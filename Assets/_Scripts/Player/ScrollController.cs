@@ -58,6 +58,7 @@ public class ScrollController : MonoBehaviour {
         anim.SetFloat("speed", Mathf.Abs(_rb.velocity.x));
         anim.SetBool("isJumping", _isJumping);
         anim.SetBool("isCriticizing", _isCriticizing);
+        anim.SetBool("isWorkingOut", _isWokingOut);
 
         // The player reachs Lvl 2 of fatness
         if (_pc.fatness == 2 && _currentLVL != 2)
@@ -161,7 +162,7 @@ public class ScrollController : MonoBehaviour {
         {
             _isWokingOut = true;
 
-            // Start WorkOut Animation & block player
+            // Block player
 
             _pc.currentFatPoints = 0;
             yield return new WaitForSeconds(1);
