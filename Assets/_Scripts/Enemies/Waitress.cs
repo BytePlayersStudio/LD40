@@ -26,8 +26,9 @@ public class Waitress : MonoBehaviour {
 	Vector2 direction;
 
 	//Nodes for the patrol behavior
-	public Transform node1;
-	public Transform node2;
+	public Transform[] waipoints;
+	private int waipointID = 0;
+
 	[HideInInspector]
 	public Transform activeNode;
 
@@ -39,7 +40,6 @@ public class Waitress : MonoBehaviour {
 	//Related to player variables.
 
 	public GameObject player;
-	float distanceFromPlayer; //Absolute distance from player
 	Vector2 directionToPlayer;
 
 	//Detection variables
@@ -71,16 +71,12 @@ public class Waitress : MonoBehaviour {
 		if (shootingRange == 0) shootingRange = 4.0f;
 		if (visionRange == 0) visionRange= 5.0f;
 
-		if (node1 == null) node1 = this.transform.parent.GetChild(1);
-		if (node2 == null) node2 = this.transform.parent.GetChild(2);
-
 		if (moveSpeed == 0) moveSpeed = 10.0f;
 
 		if(rb == null) rb = transform.GetComponent<Rigidbody2D>();
 		if (DelayBetweenBullets == 0) DelayBetweenBullets = 1.0f;
 		direction = new Vector2(transform.localScale.x, 0);
 		moveSpeedIncreased = moveSpeed * speedIncreaseFactor;
-		activeNode = node1;
 
 		lastShot = Time.time;
 
@@ -108,7 +104,7 @@ public class Waitress : MonoBehaviour {
 			Shoot();
 		}
 		setAnimations();
-		//Debug.Log(currentState.ToString());
+		Debug.Log(currentState.ToString());
 	}
 
 	void FixedUpdate()
@@ -117,8 +113,8 @@ public class Waitress : MonoBehaviour {
 		canShoot = InRange(transform, direction, shootingRange, "Player", Color.red);
 		backDetection = InRange(transform, -direction, backDetectionRange, "Player", Color.blue);
 
-		distanceFromPlayer = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
 	}
+
 	#endregion
 
 	#region Custom Functions
@@ -134,27 +130,23 @@ public class Waitress : MonoBehaviour {
 	/// </summary>
 	private void Patrol()
 	{
-		transform.Translate(direction * Time.deltaTime * moveSpeed);
-		if (Vector2.Distance(transform.position, node1.position) < .1f) {
-			FlipSprite();
-			facingRight = false;
-			activeNode = node2;
-		}
-		if (Vector2.Distance(transform.position, node2.position) < .1f)
+		if (Mathf.Abs(Vector2.Distance(waipoints[waipointID].position, transform.position)) < .5f)
 		{
-			FlipSprite();
-			facingRight = true;
-			activeNode = node1;
+			changeWaypoint();
 		}
+		//Debug.Log(waipointID);
+		Vector2 translation = Vector2.MoveTowards(this.transform.position, waipoints[waipointID].transform.position, moveSpeed * Time.deltaTime);
+		transform.position = new Vector2(translation.x, transform.position.y); ;
 
 		if (backDetection) {
-			FlipSprite();
+			changeWaypoint();
+			currentState = State.Chasing;
 		}
-
 		if (canShoot)
 			currentState = State.Shooting;
-		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange
-			 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange && isInRange && !canShoot)
+		//if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) >= shootingRange
+		//	 && Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) < visionRange && isInRange && !canShoot)
+		if(!canShoot && isInRange)
 			currentState = State.Chasing;
 	}
 	/// <summary>
@@ -162,7 +154,8 @@ public class Waitress : MonoBehaviour {
 	/// </summary>
 	private void ApproachPlayer()
 	{
-		transform.Translate(direction * Time.deltaTime * moveSpeedIncreased);
+		Vector2 translation = Vector2.MoveTowards(this.transform.position, player.transform.position, moveSpeedIncreased * Time.deltaTime);
+		this.transform.position = new Vector2(translation.x, transform.position.y);
 
 		if (Mathf.Abs(Vector2.Distance(transform.position, player.transform.position)) <= shootingRange  || canShoot)
 			currentState = State.Shooting;
@@ -236,6 +229,19 @@ public class Waitress : MonoBehaviour {
 	private void FlipSprite() {
 		transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
 		direction *= -1;
+	}
+
+	private void changeWaypoint() {
+		if (waipointID == 0)
+		{
+			waipointID = 1;
+			FlipSprite();
+		}
+		else
+		{
+			waipointID = 0;
+			FlipSprite();
+		}
 	}
 	#endregion
 }
