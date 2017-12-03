@@ -10,7 +10,8 @@ public class SceneController : MonoBehaviour {
     // Loads the Level Scene
     public void LoadLevel()
     {
-        SceneManager.LoadScene("Level");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Level");        
     }
 
     // Loads the Main Menu Scene
