@@ -102,7 +102,6 @@ public class ScrollController : MonoBehaviour {
 			changeFatnessAnimator(true, false, false);
 		}
 
-		Debug.Log("Fatness_points " + _pc.fatness + " ------ current Level " + _currentLVL);
     }
 
     private void FixedUpdate()
