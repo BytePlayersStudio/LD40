@@ -88,14 +88,14 @@ public class ScrollController : MonoBehaviour {
          * 
          * We are always checking player's orientation
          */
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && !_isWokingOut)
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime, _rb.velocity.y);
             if (!facingRight)
                 Flip();
 
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) && !_isWokingOut)
         {
             _rb.velocity = new Vector2(speed * Time.deltaTime * -1, _rb.velocity.y);
             if (facingRight)
@@ -106,9 +106,8 @@ public class ScrollController : MonoBehaviour {
             _rb.velocity = new Vector2(0, _rb.velocity.y);
             if (Input.GetKeyDown(KeyCode.R))
             {
-                if (!_isWokingOut)
-                    StartCoroutine(WorkOut());
-               
+                if (!_isWokingOut && _pc.currentFatPoints > 0)
+                    StartCoroutine(WorkOut());               
             }
         }
     }
@@ -151,21 +150,17 @@ public class ScrollController : MonoBehaviour {
         if (_pc.currentFatPoints >= workOutIncrement)
         {
             _isWokingOut = true;
-                
-            // Start WorkOut Animation & block player
 
             _pc.currentFatPoints -= workOutIncrement;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             _isWokingOut = false;
         }
         else if(_pc.currentFatPoints < workOutIncrement && _pc.currentFatPoints > 0)
         {
             _isWokingOut = true;
-
-            // Block player
-
+           
             _pc.currentFatPoints = 0;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             _isWokingOut = false;
         }
     }
