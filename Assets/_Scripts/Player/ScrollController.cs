@@ -10,9 +10,11 @@ public class ScrollController : MonoBehaviour {
     private PlayerController _pc;
     private bool _isJumping;
     private int _currentLVL;
+    private bool _isWokingOut;
 
     public float speed;
     public float jumpForce;
+    public int workOutDecrement;
     public Animator anim;
 
     [HideInInspector]
@@ -31,8 +33,9 @@ public class ScrollController : MonoBehaviour {
         _pc = GetComponent<PlayerController>();
 
         _isJumping = false;
+        _isWokingOut = false;
         facingRight = true;
-
+        
         _currentLVL = 0;
 	}
 	
@@ -91,6 +94,12 @@ public class ScrollController : MonoBehaviour {
         else
         {
             _rb.velocity = new Vector2(0, _rb.velocity.y);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if (!_isWokingOut)
+                    StartCoroutine(WorkOut());
+               
+            }
         }
     }
 
@@ -113,13 +122,41 @@ public class ScrollController : MonoBehaviour {
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0, Space.Self);
     }
-
+    
     // Detects if the player is colliding with the floor
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Platform")
         {
-            _isJumping = false;
+            _isJumping = false;            
+        }
+    }
+
+    #endregion
+
+    #region Coroutines
+    // This courutine, decrease currentFatPoints when doing workout
+    IEnumerator WorkOut()
+    {
+        if (_pc.currentFatPoints >= workOutDecrement)
+        {
+            _isWokingOut = true;
+                
+            // Start WorkOut Animation & block player
+
+            _pc.currentFatPoints -= workOutDecrement;
+            yield return new WaitForSeconds(1);
+            _isWokingOut = false;
+        }
+        else if(_pc.currentFatPoints < workOutDecrement && _pc.currentFatPoints > 0)
+        {
+            _isWokingOut = true;
+
+            // Start WorkOut Animation & block player
+
+            _pc.currentFatPoints = 0;
+            yield return new WaitForSeconds(1);
+            _isWokingOut = false;
         }
     }
 
