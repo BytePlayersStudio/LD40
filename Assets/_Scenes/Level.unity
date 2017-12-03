@@ -226,7 +226,7 @@ RectTransform:
   m_GameObject: {fileID: 190874999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.022210453, y: 0.022210453, z: 0.022210453}
+  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
   m_Children:
   - {fileID: 1122328482}
   - {fileID: 1006058348}
@@ -381,6 +381,15 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1870257932}
+    - target: {fileID: 4192761301822070, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114577930673916534, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1870257932}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
   m_IsPrefabParent: 0
@@ -458,11 +467,50 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 958766525}
---- !u!4 &961914165 stripped
+--- !u!4 &961914165
 Transform:
-  m_PrefabParentObject: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d,
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127,
     type: 2}
   m_PrefabInternal: {fileID: 2085797562}
+  m_GameObject: {fileID: 1003767948}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2058303206}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1003767948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1593399132983138, guid: 67c4e7ebb2cc5ba4f9da72adddafc127,
+    type: 2}
+  m_PrefabInternal: {fileID: 2085797562}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 961914165}
+  - component: {fileID: 1003767949}
+  m_Layer: 0
+  m_Name: PauseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1003767949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114353362939322328, guid: 67c4e7ebb2cc5ba4f9da72adddafc127,
+    type: 2}
+  m_PrefabInternal: {fileID: 2085797562}
+  m_GameObject: {fileID: 1003767948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a4c191e1629d640bfb9a230b9971ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1006058345}
 --- !u!1 &1006058345
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,8 +839,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114022093941792146, guid: d9f36925876bab84baf298bbeebee17d,
-          type: 2}
+      - m_Target: {fileID: 1003767949}
         m_MethodName: HidePauseMenu
         m_Mode: 1
         m_Arguments:
@@ -1192,8 +1239,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1870257932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.45, y: -3.32, z: 0}
-  m_LocalScale: {x: 0.14212422, y: 0.14212422, z: 0.14212422}
+  m_LocalPosition: {x: -5.228, y: -2.991, z: 0}
+  m_LocalScale: {x: 0.21030313, y: 0.21030313, z: 0.21030313}
   m_Children:
   - {fileID: 562778481}
   m_Father: {fileID: 0}
@@ -1226,6 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 300
   jumpForce: 650
+  anim: {fileID: 1870257933}
   facingRight: 0
 --- !u!114 &1870257938
 MonoBehaviour:
@@ -1316,45 +1364,49 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 2058303206}
     m_Modifications:
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4478134427285202, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+    - target: {fileID: 4572926383544812, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114022093941792146, guid: d9f36925876bab84baf298bbeebee17d,
+    - target: {fileID: 114353362939322328, guid: 67c4e7ebb2cc5ba4f9da72adddafc127,
         type: 2}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1006058345}
+    - target: {fileID: 1593399132983138, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
+      propertyPath: m_Name
+      value: PauseController
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: d9f36925876bab84baf298bbeebee17d, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 67c4e7ebb2cc5ba4f9da72adddafc127, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2131568434
 GameObject:
