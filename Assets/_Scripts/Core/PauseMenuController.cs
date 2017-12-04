@@ -26,15 +26,17 @@ public class PauseMenuController : MonoBehaviour {
 	void Update () {
 		if (SceneManager.GetActiveScene().name != "MainMenu")
 		{
-			if (Input.GetButtonDown("Pause") && !_paused)
+            if (Input.GetButtonDown("Pause") && !_paused)
 			{
-				Time.timeScale = 0f;
+                Debug.Log("Pausa");
+                Time.timeScale = 0f;
 				ShowPauseMenu();
 			}
 			}
 			else if (Input.GetButtonDown("Pause") && _paused)
 			{
-				Time.timeScale = 1;
+                Debug.Log("DesPausa");
+                Time.timeScale = 1;
 				HidePauseMenu();
 			}
 		

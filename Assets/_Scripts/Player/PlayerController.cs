@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
+        Debug.Log("SACABO");
         statBar.SetActive(false);
         gameOverMenu.SetActive(true);
         gameObject.SetActive(false);
