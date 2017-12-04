@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip eating;
     public GameObject gameOverMenu;
+    public GameObject statBar;
 
     [HideInInspector]
     public int fatness;
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
+        statBar.SetActive(false);
         gameOverMenu.SetActive(true);
         gameObject.SetActive(false);
     }

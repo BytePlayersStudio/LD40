@@ -236,13 +236,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCriticP: 25
-  currentFatPoints: 25
+  currentFatPoints: 60
   enemyContactTime: 10
   maxFatPoints: 100
   maxCriticPercentage: 25
   foodFatnessIncrease: 5
   eating: {fileID: 8300000, guid: 1ef262bd45ca8554b9a4da87c8c5f5fa, type: 3}
   gameOverMenu: {fileID: 0}
+  statBar: {fileID: 0}
   fatness: 0
   isCriticReady: 1
   bc: {fileID: 0}

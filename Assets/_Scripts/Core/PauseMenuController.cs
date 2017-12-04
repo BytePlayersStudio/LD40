@@ -9,6 +9,7 @@ public class PauseMenuController : MonoBehaviour {
     private bool _paused;
 
     public GameObject pauseMenu;
+    public GameObject statsBar;
 
     #endregion
 
@@ -41,12 +42,14 @@ public class PauseMenuController : MonoBehaviour {
     {
         _paused = true;
         pauseMenu.SetActive(true);
+        statsBar.SetActive(false);
     }
 
     public void HidePauseMenu()
     {
         _paused = false;
         pauseMenu.SetActive(false);
+        statsBar.SetActive(true);
     }
 
 
