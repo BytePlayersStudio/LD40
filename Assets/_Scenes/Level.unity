@@ -2066,6 +2066,20 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4412822573533810, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459660477123734, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1265843380}
+    - target: {fileID: 114459660477123734, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletParent
+      value: 
+      objectReference: {fileID: 538755319}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
   m_IsPrefabParent: 0
