@@ -63,6 +63,7 @@ public class Waitress : MonoBehaviour {
 
 	//Animator Variables
 	Animator anim_controller;
+	public GameObject death_anim;
 	bool isAttacking;
 
     //Stat Variables
@@ -306,8 +307,21 @@ public class Waitress : MonoBehaviour {
     private void Hitted()
     {
         --_currentLife;
-        if(_currentLife <= 0 )
-            Destroy(transform.parent.gameObject);
+		if (_currentLife <= 0)
+		{
+			//Destroy(transform.parent.gameObject);
+			Destroy(transform.GetComponent<Rigidbody2D>());
+			Destroy(transform.GetComponent<CapsuleCollider2D>());
+			Destroy(transform.GetComponent<AudioSource>());
+			Destroy(transform.parent.GetChild(1).gameObject);
+			Destroy(transform.parent.GetChild(2).gameObject);
+			Destroy(transform.GetChild(0).gameObject);
+			Destroy(transform.GetComponentInChildren<Animator>());
+			this.gameObject.transform.tag =  "Untagged";
+			death_anim.SetActive(true);
+
+			Destroy(this);
+		}
     }
 	#endregion
 }
