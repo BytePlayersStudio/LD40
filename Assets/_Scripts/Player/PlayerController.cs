@@ -27,13 +27,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool isCriticReady;
 
+    public BarController bc;
+
     #endregion
 
     #region Unity Functions
 
     void Start()
     {
-
         _EnemyTime = 0;
 
         fatness = 0;
@@ -41,6 +42,9 @@ public class PlayerController : MonoBehaviour
 		_fatnessLvl0 = 0;
         _fatnessLvl1 = maxFatPoints / 3;
         _fatnessLvl2 = _fatnessLvl1 * 2;
+
+        bc.fatMax = maxFatPoints;
+        bc.critMax = maxCriticPercentage;
 
         isCriticReady = false;
 		if (foodFatnessIncrease == 0) foodFatnessIncrease = 10;
@@ -50,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        bc.setFatValue(currentFatPoints);
+        bc.setCritValue(currentCriticP);
         // If the player is alive...
         if (IsAlive())
         {

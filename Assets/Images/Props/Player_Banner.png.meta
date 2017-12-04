@@ -1,22 +1,15 @@
 fileFormatVersion: 2
-guid: 263cfa802170ee948a156070c31862eb
-timeCreated: 1512346457
+guid: 35d195da56326b34b919616a3d1e2104
+timeCreated: 1512353569
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Player_Stats_0
-    21300002: Player_Stats_1
-    21300004: Player_Stats_2
-    21300006: Player_Stats_3
-    21300008: Player_Stats_4
-    21300010: Player_Stats_5
-    21300012: Player_Stats_6
-    21300014: Player_Stats_7
-    21300016: Player_Stats_8
-    21300018: Player_Stats_9
-    21300020: Player_Stats_10
-    21300022: Player_Stats_11
-    21300024: Player_Stats_12
+    21300000: Player_Banner_0
+    21300002: Player_Banner_1
+    21300004: Player_Banner_2
+    21300006: Player_Banner_3
+    21300008: Player_Banner_4
+    21300010: Player_Banner_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -73,7 +66,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -82,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -91,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,7 +102,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Stats_0
+      name: Player_Banner_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,13 +116,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_Stats_1
+      name: Player_Banner_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 2621
-        width: 259
-        height: 390
+        y: 1949
+        width: 4096
+        height: 1030
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,109 +130,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_Stats_2
-      rect:
-        serializedVersion: 2
-        x: 381
-        y: 2621
-        width: 262
-        height: 390
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_3
-      rect:
-        serializedVersion: 2
-        x: 765
-        y: 2621
-        width: 166
-        height: 390
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_4
-      rect:
-        serializedVersion: 2
-        x: 1117
-        y: 2621
-        width: 422
-        height: 390
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_5
+      name: Player_Banner_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 2365
-        width: 259
-        height: 198
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_6
-      rect:
-        serializedVersion: 2
-        x: 381
-        y: 2365
-        width: 230
-        height: 198
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_7
-      rect:
-        serializedVersion: 2
-        x: 765
-        y: 2365
-        width: 134
-        height: 198
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_8
-      rect:
-        serializedVersion: 2
-        x: 381
-        y: 2141
-        width: 230
-        height: 198
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_Stats_9
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1693
+        y: 893
         width: 2979
         height: 390
       alignment: 0
@@ -249,11 +144,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_Stats_10
+      name: Player_Banner_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 1277
+        y: 477
         width: 2979
         height: 390
       alignment: 0
@@ -263,11 +158,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_Stats_11
+      name: Player_Banner_4
       rect:
         serializedVersion: 2
         x: 61
-        y: 1021
+        y: 221
         width: 1510
         height: 198
       alignment: 0
@@ -277,13 +172,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_Stats_12
+      name: Player_Banner_5
       rect:
         serializedVersion: 2
         x: 61
-        y: 797
+        y: 0
         width: 1510
-        height: 198
+        height: 195
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

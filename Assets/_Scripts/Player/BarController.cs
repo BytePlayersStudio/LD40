@@ -17,23 +17,18 @@ public class BarController : MonoBehaviour {
     [SerializeField]
     private Image criticContent;
 
-    public float fatMax { get; set; }
-    public float critMax { get; set; }
+    public float fatMax;
+    public float critMax;
 
-    public float FatValue
+    public void setFatValue(float value)
     {
-        set
-        {
-            fatPoints = Map(value, 0, fatMax, 0, 1);
-        }
+        fatPoints = Map(value, 0, fatMax, 0, 1);
     }
 
-    public float CritValue
+    public void setCritValue(float value)
     {
-        set
-        {
-            critPoints = Map(value, 0, critMax, 0, 1);
-        }
+        critPoints = Map(value, 0, critMax, 0, 1);
+
     }
 
     void Update ()
