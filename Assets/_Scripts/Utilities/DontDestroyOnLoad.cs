@@ -15,6 +15,11 @@ public class DontDestroyOnLoad : MonoBehaviour {
 	#region Unity Methods
 	private static DontDestroyOnLoad _instance = null;
 	public static DontDestroyOnLoad Instance{ get{ return _instance; }}
+	public AudioClip Boss_Theme;
+	public AudioClip Credits_Song;
+	public AudioClip Main_Theme;
+	public AudioClip Menu_Theme;
+
 
 	private void Awake()
 	{
@@ -25,20 +30,10 @@ public class DontDestroyOnLoad : MonoBehaviour {
 			_instance = this;
 			DontDestroyOnLoad(_instance.gameObject);
 		}
-
-
+		GetComponent<DontDestroyOnLoad>().enabled = true;
 	}
-	private void Start()
-	{
 
 
-		if (SceneManager.GetActiveScene().name == "Credits")
-			Destroy(this.gameObject);
-		if (SceneManager.GetActiveScene().name == "MainMenu")
-			Destroy(this.gameObject);
-
-
-	}
 	#endregion
 
 	#region Custom Functions
