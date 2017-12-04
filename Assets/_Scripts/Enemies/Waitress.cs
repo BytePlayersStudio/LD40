@@ -26,8 +26,8 @@ public class Waitress : MonoBehaviour {
 	Vector2 direction;
 
 	//Nodes for the patrol behavior
-	public Transform[] waipoints;
-	private int waipointID = 0;
+	public Transform[] waypoints;
+	private int waypointID = 0;
 
 	[HideInInspector]
 	public Transform activeNode;
@@ -151,7 +151,7 @@ public class Waitress : MonoBehaviour {
 	/// </summary>
 	private void Patrol()
 	{
-		if (Mathf.Abs(Vector2.Distance(waipoints[waipointID].position, transform.position)) < .5f && !samePosition)
+		if (Mathf.Abs(Vector2.Distance(waypoints[waypointID].position, transform.position)) < .5f && !samePosition)
 		{
 			changeWaypoint();
 		}
@@ -159,7 +159,7 @@ public class Waitress : MonoBehaviour {
 		//playerCurrPosition = new Vector2(player.transform.position.x, player.transform.position.y);
 		if (!samePosition)
 		{
-			Vector2 translation = Vector2.MoveTowards(this.transform.position, waipoints[waipointID].transform.position, moveSpeed * Time.deltaTime);
+			Vector2 translation = Vector2.MoveTowards(this.transform.position, waypoints[waypointID].transform.position, moveSpeed * Time.deltaTime);
 			transform.position = new Vector2(translation.x, transform.position.y);
 		}
 		if (backDetection && !samePosition) {
@@ -287,15 +287,15 @@ public class Waitress : MonoBehaviour {
 	}
 
 	private void changeWaypoint() {
-		if (waipointID == 0)
+		if (waypointID == 0)
 		{
-			waipointID = 1;
+			waypointID = 1;
 			facingRight = false;
 			FlipSprite();
 		}
 		else
 		{
-			waipointID = 0;
+			waypointID = 0;
 			facingRight = true;
 			FlipSprite();
 		}
