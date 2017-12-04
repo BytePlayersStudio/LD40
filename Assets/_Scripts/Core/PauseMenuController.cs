@@ -24,15 +24,15 @@ public class PauseMenuController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (SceneManager.GetActiveScene().name != "MainMenu")
-		{
+		//if (SceneManager.GetActiveScene().name != "MainMenu")
+		//{
             if (Input.GetButtonDown("Pause") && !_paused)
 			{
                 Debug.Log("Pausa");
                 Time.timeScale = 0f;
 				ShowPauseMenu();
 			}
-			}
+		//	}
 			else if (Input.GetButtonDown("Pause") && _paused)
 			{
                 Debug.Log("DesPausa");
@@ -50,19 +50,19 @@ public class PauseMenuController : MonoBehaviour {
     {
 		
         _paused = true;
-		if(pauseMenu != null)
-			pauseMenu.SetActive(true);
-		if (statsBar != null)
-			statsBar.SetActive(false);
+	//	if(pauseMenu != null)
+		pauseMenu.SetActive(true);
+		//if (statsBar != null)
+		statsBar.SetActive(false);
     }
 
     public void HidePauseMenu()
     {
         _paused = false;
-		if (pauseMenu != null)
-			pauseMenu.SetActive(false);
-		if (statsBar != null)
-			statsBar.SetActive(true);
+	//	if (pauseMenu != null)
+		pauseMenu.SetActive(false);
+	//	if (statsBar != null)
+		statsBar.SetActive(true);
     }
 
 
