@@ -397,14 +397,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebdc4a62a0c0d594c9e482279663d9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingRange: 2
+  shootingRange: 5
   visionRange: 10
-  backDetectionRange: 2
+  backDetectionRange: 3
   waypoints:
   - {fileID: 4381103008696522}
   - {fileID: 4433584255052450}
   activeNode: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 3
   speedIncreaseFactor: 2
   player: {fileID: 0}
   backDetection: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   - {fileID: 1931691985161496, guid: 2191349d82eb87447a28a037bc7e4a9d, type: 2}
   - {fileID: 1621190004473598, guid: 3ccb16542b3d3c94a92cd4ecd8a7233b, type: 2}
   bulletSpawn: {fileID: 4329875879472826}
-  bulletSpeed: 400
+  bulletSpeed: 600
   DelayBetweenBullets: 1
   death_anim: {fileID: 1059948844817132}
   maxLife: 1
