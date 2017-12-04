@@ -14,15 +14,24 @@ public class SceneController : MonoBehaviour {
         SceneManager.LoadScene("Level");        
     }
 
+    // Loads the BossLevel Scene
+    public void LoadBossLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("BossLevel");
+    }
+
     // Loads the Main Menu Scene
     public void LoadMainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 
     // Loads the Credits Scene
     public void LoadCredits()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Credits");
     }
 
