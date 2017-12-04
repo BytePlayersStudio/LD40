@@ -74,8 +74,6 @@ public class Waitress : MonoBehaviour {
 
 	void Start () 
 	{
-		if (player == null) Debug.LogError("Player not found.");
-
 		if (shootingRange == 0) shootingRange = 4.0f;
 		if (visionRange == 0) visionRange= 5.0f;
 
@@ -83,7 +81,7 @@ public class Waitress : MonoBehaviour {
 
 		if(rb == null) rb = transform.GetComponent<Rigidbody2D>();
 		if (DelayBetweenBullets == 0) DelayBetweenBullets = 1.0f;
-		if (bulletParent == null) Debug.LogError("Bullet Parent not found. Set a parent for the bullets.");
+		if (bulletParent == null) Debug.LogError("Bullet Parent not found. Set a parent for the bullets. " + this.name);
 
 		direction = new Vector2(transform.localScale.x, 0);
 		moveSpeedIncreased = moveSpeed * speedIncreaseFactor;

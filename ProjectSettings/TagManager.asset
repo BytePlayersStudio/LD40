@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Node
   - CriticBullet
+  - Boss
   layers:
   - Default
   - TransparentFX
