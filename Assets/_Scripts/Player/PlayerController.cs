@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
         _EnemyTime = 0;
 
         fatness = 0;
