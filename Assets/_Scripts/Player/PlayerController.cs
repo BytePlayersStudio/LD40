@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public int maxFatPoints;
     public int maxCriticPercentage;
 	public int foodFatnessIncrease;
+	public int foodFatnessIncreaseByBoss;
 
     public AudioClip eating;
     public GameObject gameOverMenu;
@@ -49,8 +50,9 @@ public class PlayerController : MonoBehaviour
 
         isCriticReady = false;
 		if (foodFatnessIncrease == 0) foodFatnessIncrease = 10;
+		foodFatnessIncreaseByBoss = foodFatnessIncrease + 20;
 
-        StartCoroutine(addCriticPercentage());
+		StartCoroutine(addCriticPercentage());
     }
 
     void Update()
@@ -122,6 +124,12 @@ public class PlayerController : MonoBehaviour
             GetComponent<AudioSource>().clip = eating;
             GetComponent<AudioSource>().Play();
             Destroy(collision.gameObject);
+		}
+		if (collision.gameObject.tag == "Boss")
+		{
+			currentFatPoints += foodFatnessIncreaseByBoss;
+			GetComponent<AudioSource>().clip = eating;
+			GetComponent<AudioSource>().Play();
 		}
 	}
 	#endregion

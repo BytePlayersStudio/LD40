@@ -42,6 +42,12 @@ public class Boss : MonoBehaviour {
 	bool goAttack =  false;
 	//Stats variables
 	Boss_Stats stats;
+	//Animation variables
+	Animator anim;
+	public GameObject go_death;
+	bool isThrowing = true;
+	bool isAttacking = false;
+	bool isDamaged =  false;
 	#endregion
 
 	#region Unity Methods
@@ -55,26 +61,44 @@ public class Boss : MonoBehaviour {
 		if (player == null) Debug.LogError("Assign a player for boss: " + this.name);
 		if (bulletParent == null) Debug.LogError("Assign a parent for the bullets " + this.name);
 		if (waitresses == null) Debug.LogError("Assign spawning waitresses to the boss " + this.name);
+		if (go_death == null) Debug.LogError("Assign death game object " + this.name);
 		if (stats == null) stats = GetComponent<Boss_Stats>();
+
+		anim = GetComponentInChildren<Animator>();
 		waitressesSpawned = false;
 		currentState = State.Patrol;
 	}
 
 	void Update ()
 	{
-		if(currentState == State.Patrol)
+		if (currentState == State.Patrol)
+		{
+			isThrowing = true;
+			isAttacking = false;
 			Patrol();
+		}
 		if (currentState == State.AttackPlayer)
+		{
+			isThrowing = false;
+			isAttacking = true;
 			AttackPlayer();
+		}
 		if (currentState == State.Death)
+		{
 			Death();
+		}
 		//Debug.Log(currentState);
+		anim.SetBool("isThrowing", isThrowing);
+		anim.SetBool("isAttacking", isAttacking);
+		anim.SetBool("isDamaged", isDamaged);
 
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "CriticBullet")
 		{
+			isDamaged = true;
+			StartCoroutine(WaitDamageAnimation(1));
 			stats.health -= stats.healthDecrease;
 			if (stats.health <= 0)
 				currentState = State.Death;
@@ -85,7 +109,9 @@ public class Boss : MonoBehaviour {
 	#region Custom Functions
 	private void Death()
 	{
-		Destroy(this.gameObject);
+		go_death.SetActive(true);
+		go_death.transform.parent = null;
+		Destroy(this.transform.parent.gameObject);
 	}
 	private void AttackPlayer()
 	{
@@ -161,14 +187,16 @@ public class Boss : MonoBehaviour {
 	private void changeWaypoint()
 	{
 		waypointID = Random.Range(0, waypoints.Length);
-		//Debug.Log(waypointID);
 	}
 	IEnumerator Wait(int seconds)
 	{
-		//Debug.Log("HELLO");
 		yield return new WaitForSeconds(seconds);
-		//Debug.Log("bYE");
 		goAttack = false;
+	}
+	IEnumerator WaitDamageAnimation(int seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		isDamaged = false;
 	}
 	#endregion
 }
