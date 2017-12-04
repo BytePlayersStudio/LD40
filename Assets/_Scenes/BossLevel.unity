@@ -806,7 +806,8 @@ Prefab:
       propertyPath: statsBar
       value: 
       objectReference: {fileID: 165863937}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114814933929510740, guid: 0e9fa68ddc07ba147b0471468b4c0b47, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0e9fa68ddc07ba147b0471468b4c0b47, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &563768707
@@ -3465,7 +3466,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4513725714669500, guid: 5b24eef632b2e5c4981ee6c4af8d9726, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 29.55
+      value: 31.88
       objectReference: {fileID: 0}
     - target: {fileID: 4513725714669500, guid: 5b24eef632b2e5c4981ee6c4af8d9726, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3497,13 +3498,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1578580690792886, guid: 5b24eef632b2e5c4981ee6c4af8d9726, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114002866266188668, guid: 5b24eef632b2e5c4981ee6c4af8d9726,
         type: 2}
       propertyPath: sceneName
       value: Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 1578580690792886, guid: 5b24eef632b2e5c4981ee6c4af8d9726, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b24eef632b2e5c4981ee6c4af8d9726, type: 2}
   m_IsPrefabParent: 0
