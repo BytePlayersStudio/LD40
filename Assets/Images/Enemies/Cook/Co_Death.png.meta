@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: 6130c119c3be5204e9215a1f26f53b71
-timeCreated: 1512406982
+timeCreated: 1512407236
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Co_Death_0
+    21300002: Co_Death_1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -76,7 +78,35 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Co_Death_0
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 768
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Co_Death_1
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 0
+        width: 768
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

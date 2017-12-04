@@ -230,6 +230,10 @@ public class Waitress : MonoBehaviour {
 		if (Time.time - lastShot > DelayBetweenBullets)
 		{
 			var bullet = (GameObject)Instantiate(bulletPrf, bulletSpawn.position, bulletSpawn.rotation);
+			if (gameObject.name == "Cook_logic")
+			{
+				bullet.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+			}
 			bullet.transform.SetParent(bulletParent);
 			bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(1 * transform.localScale.x,1) * bulletSpeed * 10);
 			Destroy(bullet, 2.0f);
@@ -269,7 +273,7 @@ public class Waitress : MonoBehaviour {
 		}
 
 		RaycastHit2D hit = Physics2D.Raycast(updatedPos, direction, range);
-		//Debug.DrawRay(updatedPos, direction * range, debugColor);
+		Debug.DrawRay(updatedPos, direction * range, debugColor);
 
 		if (hit.collider != null && hit.collider.tag == objetiveTag)
 		{

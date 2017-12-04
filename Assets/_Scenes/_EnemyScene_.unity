@@ -494,62 +494,50 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalPosition.x
       value: 21.86
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalPosition.y
       value: -3.154
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalPosition.z
       value: -0.07421875
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+    - target: {fileID: 4540646295112180, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114925574237827064, guid: 7544e9c6d058b2f4db24accca7e245fc,
+    - target: {fileID: 114333507608069940, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 705449596}
-    - target: {fileID: 114925574237827064, guid: 7544e9c6d058b2f4db24accca7e245fc,
+    - target: {fileID: 114333507608069940, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac,
         type: 2}
       propertyPath: bulletParent
       value: 
       objectReference: {fileID: 1254138954}
-    - target: {fileID: 1872495522126584, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
-      propertyPath: m_Name
-      value: Cook
-      objectReference: {fileID: 0}
-    - target: {fileID: 1871159029718512, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
-      propertyPath: m_Name
-      value: Cook_logic
-      objectReference: {fileID: 0}
-    - target: {fileID: 1145421279021630, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
-      propertyPath: m_Name
-      value: cookGraphics
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 66c90aef601aa9b4e9a5b8da87b4b7ac, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1020856707
 GameObject:
