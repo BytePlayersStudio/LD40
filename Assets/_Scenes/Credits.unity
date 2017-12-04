@@ -338,7 +338,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 699812242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23464966, y: -361.5, z: 0}
+  m_LocalPosition: {x: -0.23464966, y: -414.5, z: 0}
   m_LocalScale: {x: 1.4692802, y: 1.4692798, z: 1.4692798}
   m_Children:
   - {fileID: 1425487773}
@@ -954,7 +954,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1357388664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 280, y: 157.5, z: 0}
+  m_LocalPosition: {x: 374, y: 210.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1833824969}
@@ -1034,7 +1034,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*Insert Game Title*'
+  m_Text: Gourmet's Mayhem
 --- !u!222 &1425487775
 CanvasRenderer:
   m_ObjectHideFlags: 0
