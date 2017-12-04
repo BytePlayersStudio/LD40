@@ -238,8 +238,8 @@ Transform:
   m_Children:
   - {fileID: 1859531846}
   - {fileID: 689682990}
-  - {fileID: 2058303206}
   - {fileID: 1648533311}
+  - {fileID: 2058303206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -358,7 +358,7 @@ RectTransform:
   m_GameObject: {fileID: 190874999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.317639, y: 0, z: 90}
-  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
+  m_LocalScale: {x: 0.022213375, y: 0.022213375, z: 0.022213375}
   m_Children:
   - {fileID: 1006058348}
   - {fileID: 613335984}
@@ -2080,6 +2080,24 @@ Prefab:
       propertyPath: bulletParent
       value: 
       objectReference: {fileID: 538755319}
+    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087583585281714, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114925574237827064, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1265843380}
+    - target: {fileID: 114925574237827064, guid: 7544e9c6d058b2f4db24accca7e245fc,
+        type: 2}
+      propertyPath: bulletParent
+      value: 
+      objectReference: {fileID: 538755319}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7544e9c6d058b2f4db24accca7e245fc, type: 2}
   m_IsPrefabParent: 0
@@ -2330,7 +2348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 87946764}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1648533312
 AudioSource:
@@ -2891,7 +2909,7 @@ Transform:
   - {fileID: 538755319}
   - {fileID: 1357628098}
   m_Father: {fileID: 87946764}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2085797562
 Prefab:
