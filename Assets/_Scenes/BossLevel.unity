@@ -754,6 +754,11 @@ Prefab:
       propertyPath: foodFatnessIncreaseByBoss
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 50941311064684570, guid: ab5cce0b3ad36944c9777176e8a5495c,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 585fcbee3a1d8b2479097670e2de0faf, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab5cce0b3ad36944c9777176e8a5495c, type: 2}
   m_IsPrefabParent: 0
