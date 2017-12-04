@@ -92,8 +92,12 @@ public class Waitress : MonoBehaviour {
 
 		facingRight = true;
 		currentState = State.Patrol;
-                
-        if (maxLife == 0) {
+		if (waypoints == null) {
+			Debug.LogError("Assign Nodes to Waitress");
+		}
+
+
+		if (maxLife == 0) {
             _currentLife = 1;
             maxLife = 1;
         }

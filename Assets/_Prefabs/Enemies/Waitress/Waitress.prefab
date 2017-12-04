@@ -336,7 +336,7 @@ MonoBehaviour:
   shootingRange: 2
   visionRange: 10
   backDetectionRange: 2
-  waipoints:
+  waypoints:
   - {fileID: 4697787081277208}
   - {fileID: 4860363155455916}
   activeNode: {fileID: 0}
