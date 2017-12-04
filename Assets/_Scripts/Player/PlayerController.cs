@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
             ++currentFatPoints;
             _EnemyTime = 0;
         }
-    }
+
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -132,6 +133,7 @@ public class PlayerController : MonoBehaviour
 			GetComponent<AudioSource>().clip = eating;
 			GetComponent<AudioSource>().Play();
 		}
+
 	}
 	#endregion
 

@@ -749,6 +749,11 @@ Prefab:
       propertyPath: currentFatPoints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114855768451660924, guid: ab5cce0b3ad36944c9777176e8a5495c,
+        type: 2}
+      propertyPath: foodFatnessIncreaseByBoss
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab5cce0b3ad36944c9777176e8a5495c, type: 2}
   m_IsPrefabParent: 0
