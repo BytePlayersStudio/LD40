@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour {
 
@@ -17,21 +18,26 @@ public class PauseMenuController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _paused = false;
+
+		_paused = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Pause") && !_paused)
-        {
-            Time.timeScale = 0f;
-            ShowPauseMenu();
-        }
-        else if (Input.GetButtonDown("Pause") && _paused)
-        {
-            Time.timeScale = 1;
-            HidePauseMenu();
-        }
+		if (SceneManager.GetActiveScene().name != "MainMenu")
+		{
+			if (Input.GetButtonDown("Pause") && !_paused)
+			{
+				Time.timeScale = 0f;
+				ShowPauseMenu();
+			}
+			}
+			else if (Input.GetButtonDown("Pause") && _paused)
+			{
+				Time.timeScale = 1;
+				HidePauseMenu();
+			}
+		
 	}
 
     #endregion
@@ -40,16 +46,21 @@ public class PauseMenuController : MonoBehaviour {
 
     public void ShowPauseMenu()
     {
+		
         _paused = true;
-        pauseMenu.SetActive(true);
-        statsBar.SetActive(false);
+		if(pauseMenu != null)
+			pauseMenu.SetActive(true);
+		if (statsBar != null)
+			statsBar.SetActive(false);
     }
 
     public void HidePauseMenu()
     {
         _paused = false;
-        pauseMenu.SetActive(false);
-        statsBar.SetActive(true);
+		if (pauseMenu != null)
+			pauseMenu.SetActive(false);
+		if (statsBar != null)
+			statsBar.SetActive(true);
     }
 
 

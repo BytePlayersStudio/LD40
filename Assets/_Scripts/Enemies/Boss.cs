@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour {
 
-	enum State {
+	public enum State {
 		Patrol,
 		AttackPlayer,
 		Death
 	};
-	State currentState;
+	public State currentState;
 	#region Variables
 	//Bullet variables
 	public GameObject player;
@@ -48,6 +48,8 @@ public class Boss : MonoBehaviour {
 	bool isThrowing = true;
 	bool isAttacking = false;
 	bool isDamaged =  false;
+
+	public GameObject levelLoader;
 	#endregion
 
 	#region Unity Methods
@@ -62,6 +64,8 @@ public class Boss : MonoBehaviour {
 		if (bulletParent == null) Debug.LogError("Assign a parent for the bullets " + this.name);
 		if (waitresses == null) Debug.LogError("Assign spawning waitresses to the boss " + this.name);
 		if (go_death == null) Debug.LogError("Assign death game object " + this.name);
+		if (levelLoader == null) Debug.LogError("Assign levelLoader game object " + this.name);
+
 		if (stats == null) stats = GetComponent<Boss_Stats>();
 
 		anim = GetComponentInChildren<Animator>();
@@ -109,6 +113,7 @@ public class Boss : MonoBehaviour {
 	#region Custom Functions
 	private void Death()
 	{
+		levelLoader.SetActive(true);
 		go_death.SetActive(true);
 		go_death.transform.parent = null;
 		Destroy(this.transform.parent.gameObject);
