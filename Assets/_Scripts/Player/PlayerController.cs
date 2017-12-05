@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("SACABO");
         statBar.SetActive(false);
         gameOverMenu.SetActive(true);
         gameObject.SetActive(false);
@@ -110,9 +109,9 @@ public class PlayerController : MonoBehaviour
     {
         ++_EnemyTime;
 
-        if (col.gameObject.tag == "Enemy" && _EnemyTime >= enemyContactTime)
+        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "KillFloor") && _EnemyTime >= enemyContactTime)
         {
-            ++currentFatPoints;
+            currentFatPoints += 15;
             _EnemyTime = 0;
         }
 
@@ -134,7 +133,7 @@ public class PlayerController : MonoBehaviour
 			GetComponent<AudioSource>().Play();
 		}
 
-	}
+    }
 	#endregion
 
 	#region Coroutines

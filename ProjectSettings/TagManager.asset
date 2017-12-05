@@ -10,6 +10,7 @@ TagManager:
   - Node
   - CriticBullet
   - Boss
+  - KillFloor
   layers:
   - Default
   - TransparentFX
